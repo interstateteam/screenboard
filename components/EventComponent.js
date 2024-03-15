@@ -4,7 +4,7 @@ const EventComponent = () => {
    const [message, setMessage] = useState("");
 
    useEffect(() => {
-      const eventSource = new EventSource("https://screenboard-api.vercel.app/events");
+      const eventSource = new EventSource("https://screenboard-api.vercel.app/");
 
       if (typeof EventSource !== "undefined") {
          console.log("all good!", eventSource);
