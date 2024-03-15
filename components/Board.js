@@ -24,7 +24,7 @@ function PubSubMessages() {
 
    const publicFromClientHandler = (_event) => {
       if (channel === null) return;
-      channel.publish("update-from-client", { text: `@ ${new Date().toISOString()}` });
+      channel.publish("update-from-client", { text: `changed @ ${new Date().toISOString()}` });
    };
 
    const publicFromServerHandler = (_event) => {
