@@ -23,9 +23,11 @@ const previewClient = createClient({
 
 const getClient = (preview) => (preview ? previewClient : client);
 
+/*
 function parseEntries(entries, cb = parsePost) {
    return entries?.items?.map(cb);
 }
+*/
 
 export async function getSection(type) {
    return await getClient(process.env.NODE_ENV !== "production").getEntries({

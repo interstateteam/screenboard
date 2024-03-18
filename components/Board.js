@@ -50,6 +50,7 @@ function PubSubMessages() {
          headers: {
             "content-type": "application/json",
          },
+         cache: "no-store",
       })
          .then((res) => {
             return res.json();
