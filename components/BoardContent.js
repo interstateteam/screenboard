@@ -2,6 +2,7 @@
 
 import { useChannel } from "ably/react";
 import { useEffect, useState, useRef } from "react";
+import styles from "./BoardContent.module.css";
 import TextItem from "./TextItem";
 import ImageItem from "./ImageItem";
 import VideoItem from "./VideoItem";
@@ -11,7 +12,7 @@ export default function BoardContent() {
    const [contentfulData, setContentfulData] = useState(null);
    const [index, setIndex] = useState(0);
 
-   const delay = 2500;
+   //const delay = 2500;
    const timeoutRef = useRef(null);
 
    useEffect(() => {
@@ -19,9 +20,10 @@ export default function BoardContent() {
    }, []);
 
    useEffect(() => {
-      const len = contentfulData ? contentfulData.board.items.length : -1;
+      const len = contentfulData ? contentfulData.board.items.length - 1 : -1;
+      const delay = contentfulData ? contentfulData.board.items[index].fields.delay : 3;
       resetTimeout();
-      timeoutRef.current = setTimeout(() => setIndex((prevIndex) => (prevIndex === len - 1 ? 0 : prevIndex + 1)), delay);
+      timeoutRef.current = setTimeout(() => setIndex((prevIndex) => (prevIndex === len ? 0 : prevIndex + 1)), delay * 1000);
 
       return () => {
          resetTimeout();
@@ -94,5 +96,5 @@ export default function BoardContent() {
       }
    }
 
-   return <>{contentfulData && getModule()}</>;
+   return <div className={styles.boardContent}>{contentfulData && getModule()}</div>;
 }
