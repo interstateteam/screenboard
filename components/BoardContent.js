@@ -59,7 +59,6 @@ export default function BoardContent() {
    */
 
    const retrieveContentfulData = (_event) => {
-      console.log("change detetcted!!");
       setIndex(0);
       fetch("/api/contentful", {
          method: "GET",

@@ -1,6 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import * as Ably from "ably/promises";
-import { createClient } from "contentful";
 
 export async function POST(req) {
    if (!process.env.ABLY_API_KEY) {
@@ -23,6 +22,6 @@ export async function POST(req) {
    const clientId = (await req.formData()).get("clientId")?.toString() || process.env.DEFAULT_CLIENT_ID || "NO_CLIENT_ID";
    const client = new Ably.Rest(process.env.ABLY_API_KEY);
    const tokenRequestData = await client.auth.createTokenRequest({ clientId: clientId });
-   console.log(tokenRequestData);
+   //console.log(tokenRequestData);
    return NextResponse.json(tokenRequestData);
 }
