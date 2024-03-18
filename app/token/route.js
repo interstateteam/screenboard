@@ -23,6 +23,6 @@ export async function POST(req) {
    const clientId = (await req.formData()).get("clientId")?.toString() || process.env.DEFAULT_CLIENT_ID || "NO_CLIENT_ID";
    const client = new Ably.Rest(process.env.ABLY_API_KEY);
    const tokenRequestData = await client.auth.createTokenRequest({ clientId: clientId });
-   console.log(tokenRequestData);
+   //console.log(tokenRequestData);
    return NextResponse.json(tokenRequestData);
 }

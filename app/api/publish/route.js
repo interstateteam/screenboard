@@ -24,25 +24,9 @@ export async function POST(req) {
    var channel = client.channels.get("status-updates");
    const message = await req.json();
 
-   console.log("channel update", message);
    const msg = {
-      text: `external-from-server @ ${new Date().toISOString()}`,
+      text: "external-from-server",
    };
-
-   /*
-
-   // By publishing via the serverless function you can perform
-   // checks in a trusted environment on the data being published
-   const disallowedWords = ["foo", "bar", "fizz", "buzz"];
-
-   const containsDisallowedWord = disallowedWords.some((word) => {
-      return message.text.match(new RegExp(`\\b${word}\\b`));
-   });
-
-   if (containsDisallowedWord) {
-      return new Response("", { status: 403 });
-   }
-   */
 
    await channel.publish("cms", msg);
    return new Response("");

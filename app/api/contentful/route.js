@@ -39,6 +39,5 @@ export async function getSection(type) {
 
 export async function getSiteData() {
    const board = await getSection("board");
-   console.log("Data", board.items[0].fields);
    return { board: board.items[0].fields };
 }
