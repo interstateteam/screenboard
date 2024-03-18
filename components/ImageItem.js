@@ -16,7 +16,6 @@ export default function ImageItem(props) {
          }}
          width={data.details.image.width}
          height={data.details.image.height}
-         priority
       />
    );
 }
