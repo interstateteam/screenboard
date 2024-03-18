@@ -28,8 +28,6 @@ export async function POST(req) {
       text: "external-from-server",
    };
 
-   console.log(msg);
-
    await channel.publish("cms", msg);
    return new Response("");
 }
