@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import * as Ably from "ably/promises";
+import { createClient } from "contentful";
 
 export async function POST(req) {
    if (!process.env.ABLY_API_KEY) {

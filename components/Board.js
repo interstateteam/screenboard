@@ -2,7 +2,7 @@
 
 import * as Ably from "ably/promises";
 import { AblyProvider, useChannel } from "ably/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Board() {
    const prefix = process.env.API_ROOT || "";
@@ -16,10 +16,17 @@ export default function Board() {
 }
 
 function PubSubMessages() {
-   const [logs, setLogs] = useState();
+   const [channelData, setChannelData] = useState({ msg: "initial fetch" });
+   const [contentfulData, setContentfulData] = useState(null);
+
+   useEffect(() => {
+      retrieveContentfulData();
+   }, []);
 
    const { channel } = useChannel("status-updates", (message) => {
-      setLogs(message.data.text);
+      console.log("change detected");
+      setChannelData({ msg: message.data.text });
+      retrieveContentfulData();
    });
 
    const publicFromClientHandler = (_event) => {
@@ -28,13 +35,32 @@ function PubSubMessages() {
    };
 
    const publicFromServerHandler = (_event) => {
-      fetch("/api", {
+      fetch("/api/publish", {
          method: "POST",
          headers: {
             "content-type": "application/json",
          },
-         body: JSON.stringify({ text: `@ ${new Date().toISOString()}` }),
+         body: JSON.stringify({ text: "server btn" }),
       });
+   };
+
+   const retrieveContentfulData = (_event) => {
+      fetch("/api/contentful", {
+         method: "GET",
+         headers: {
+            "content-type": "application/json",
+         },
+      })
+         .then((res) => {
+            return res.json();
+         })
+         .then((jsonData) => {
+            return JSON.stringify(jsonData);
+         })
+         .then((jsonStr) => {
+            setContentfulData(JSON.parse(jsonStr).result);
+            console.log(jsonStr);
+         });
    };
 
    return (
@@ -44,7 +70,9 @@ function PubSubMessages() {
             &nbsp;
             <button onClick={publicFromServerHandler}>Publish from Server</button>
             &nbsp;
-            {logs}
+            {channelData.msg}
+            <br />
+            {contentfulData && contentfulData.board.title}
          </div>
       </>
    );

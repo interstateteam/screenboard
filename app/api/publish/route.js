@@ -24,9 +24,9 @@ export async function POST(req) {
    var channel = client.channels.get("status-updates");
    const message = await req.json();
 
-   console.log(message);
+   console.log("channel update", message);
    const msg = {
-      text: "external change",
+      text: `external-from-server @ ${new Date().toISOString()}`,
    };
 
    /*
