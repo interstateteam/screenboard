@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { createClient } from "contentful";
+import { revalidatePath } from "next/cache";
 
 export async function GET() {
+   revalidatePath("api/contentful");
    try {
       const result = await getSiteData();
       return NextResponse.json({ result });
