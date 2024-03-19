@@ -1,0 +1,55 @@
+.textItem {
+   display: flex;
+   position: relative;
+   width: 100%;
+   height: 100%;
+}
+
+.pos {
+   margin: 10%;
+}
+
+.cpos {
+   justify-content: center;
+   align-items: center;
+}
+
+.clpos {
+   justify-content: left;
+   align-items: center;
+}
+
+.crpos {
+   justify-content: right;
+   align-items: center;
+}
+
+.tcpos {
+   justify-content: center;
+   align-items: flex-start;
+}
+
+.tlpos {
+   justify-content: left;
+   align-items: flex-start;
+}
+
+.trpos {
+   justify-content: right;
+   align-items: flex-start;
+}
+
+.bcpos {
+   justify-content: center;
+   align-items: flex-end;
+}
+
+.blpos {
+   justify-content: left;
+   align-items: flex-end;
+}
+
+.brpos {
+   justify-content: right;
+   align-items: flex-end;
+}

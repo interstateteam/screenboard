@@ -3,17 +3,13 @@
 import { useChannel } from "ably/react";
 import { useEffect, useState, useRef } from "react";
 import styles from "./BoardContent.module.css";
-import TextItem from "./TextItem";
-import ImageItem from "./ImageItem";
-import VideoItem from "./VideoItem";
-import FrameItem from "./FrameItem";
+import Feature from "./Feature";
 
 export default function BoardContent() {
    const [channelData, setChannelData] = useState({ msg: "initial fetch" });
    const [contentfulData, setContentfulData] = useState(null);
    const [index, setIndex] = useState(0);
 
-   //const delay = 2500;
    const timeoutRef = useRef(null);
 
    useEffect(() => {
@@ -21,15 +17,28 @@ export default function BoardContent() {
    }, []);
 
    useEffect(() => {
-      const len = contentfulData ? contentfulData.board.items.length - 1 : -1;
       const delay = contentfulData ? contentfulData.board.items[index].fields.delay : 3;
+      console.log(contentfulData);
       resetTimeout();
-      timeoutRef.current = setTimeout(() => setIndex((prevIndex) => (prevIndex === len ? 0 : prevIndex + 1)), delay * 1000);
+      if (contentfulData && contentfulData.board.items[index].fields.content.fields.asset) {
+         if (contentfulData.board.items[index].fields.content.fields.vidOverride && contentfulData.board.items[index].fields.content.fields.asset.fields.file.contentType.includes("video")) {
+            //Video asset - do nothing
+         } else {
+            timeoutRef.current = setTimeout(() => getNext(), delay * 1000);
+         }
+      } else {
+         timeoutRef.current = setTimeout(() => getNext(), delay * 1000);
+      }
 
       return () => {
          resetTimeout();
       };
    }, [index]);
+
+   function getNext() {
+      const len = contentfulData ? contentfulData.board.items.length - 1 : -1;
+      setIndex((prevIndex) => (prevIndex === len ? 0 : prevIndex + 1));
+   }
 
    function resetTimeout() {
       if (timeoutRef.current) {
@@ -41,23 +50,6 @@ export default function BoardContent() {
       setChannelData({ msg: message.data.text });
       retrieveContentfulData();
    });
-
-   /*
-   const publicFromClientHandler = (_event) => {
-      if (channel === null) return;
-      channel.publish("update-from-client", { text: `changed @ ${new Date().toISOString()}` });
-   };
-
-   const publicFromServerHandler = (_event) => {
-      fetch("/api/publish", {
-         method: "POST",
-         headers: {
-            "content-type": "application/json",
-         },
-         body: JSON.stringify({ text: "server btn" }),
-      });
-   };
-   */
 
    const retrieveContentfulData = (_event) => {
       setIndex(0);
@@ -81,19 +73,8 @@ export default function BoardContent() {
 
    function getModule() {
       const item = contentfulData.board.items[index];
-      if (item && item.sys) {
-         switch (item.sys.contentType.sys.id) {
-            case "textItem":
-               return <TextItem data={item} />;
-            case "imageItem":
-               return <ImageItem data={item} />;
-            case "videoItem":
-               return <VideoItem data={item} />;
-            case "frameItem":
-               return <FrameItem data={item} />;
-            default:
-               return null;
-         }
+      if (item) {
+         return <Feature data={item} onDispatch={getNext} />;
       } else {
          return null;
       }

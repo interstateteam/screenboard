@@ -34,6 +34,7 @@ function parseEntries(entries, cb = parsePost) {
 export async function getSection(type) {
    return await getClient(process.env.NODE_ENV !== "production").getEntries({
       content_type: type,
+      include: 10,
    });
 }
 

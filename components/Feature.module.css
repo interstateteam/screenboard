@@ -1,0 +1,15 @@
+.feature {
+   display: flex;
+   position: relative;
+   width: 100vw;
+   height: 100vh;
+   justify-content: center;
+   align-items: center;
+}
+
+.feature-overlay {
+   display: block;
+   position: absolute;
+   width: 100vw;
+   height: 100vh;
+}
