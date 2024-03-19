@@ -6,6 +6,7 @@ import styles from "./BoardContent.module.css";
 import TextItem from "./TextItem";
 import ImageItem from "./ImageItem";
 import VideoItem from "./VideoItem";
+import FrameItem from "./FrameItem";
 
 export default function BoardContent() {
    const [channelData, setChannelData] = useState({ msg: "initial fetch" });
@@ -88,6 +89,8 @@ export default function BoardContent() {
                return <ImageItem data={item} />;
             case "videoItem":
                return <VideoItem data={item} />;
+            case "frameItem":
+               return <FrameItem data={item} />;
             default:
                return null;
          }
