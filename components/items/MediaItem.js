@@ -26,10 +26,10 @@ export default function MediaItem(props) {
                className={styles.imageItem}
                src={"https:" + data.url}
                alt="image"
-               sizes="100vw"
+               sizes="100%"
                style={{
                   width: "auto",
-                  height: "100vh",
+                  height: "100%",
                }}
                width={data.details.image.width}
                height={data.details.image.height}

@@ -1,4 +1,16 @@
 .boardContent {
    display: block;
    position: relative;
+   aspect-ratio: 9 / 16;
+   height: 100vh;
+}
+
+.fixedScreen {
+   position: relative;
+   width: 1080px;
+   height: 1920px;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   transform-origin: center center;
 }

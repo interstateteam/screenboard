@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
+
+const cspHeader = `
+    frame-ancestors 'self' https://app.contentful.com;
+    `;
+
 const nextConfig = {
    // disabling strict mode since the examples use
    // useEffect with no dependencies to ensure the function
@@ -24,6 +29,19 @@ const nextConfig = {
             hostname: "images.ctfassets.net",
          },
       ],
+   },
+   async headers() {
+      return [
+         {
+            source: "/(.*)",
+            headers: [
+               {
+                  key: "Content-Security-Policy",
+                  value: cspHeader.replace(/\n/g, ""),
+               },
+            ],
+         },
+      ];
    },
 };
 

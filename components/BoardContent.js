@@ -11,14 +11,31 @@ export default function BoardContent() {
    const [index, setIndex] = useState(0);
 
    const timeoutRef = useRef(null);
+   const screenRef = useRef(null);
 
    useEffect(() => {
       retrieveContentfulData();
+
+      const w = 1080;
+      const h = 1920;
+
+      const handleResize = (e) => {
+         let scale = Math.min(e.target.innerWidth / w, e.target.innerHeight / h);
+
+         screenRef.current.style.transform = "translate(-50%, -50%) " + "scale(" + scale + ")";
+      };
+      window.addEventListener("resize", handleResize);
+
+      handleResize({ target: window });
+
+      return () => {
+         window.removeEventListener("resize", handleResize);
+      };
    }, []);
 
    useEffect(() => {
       const delay = contentfulData ? contentfulData.board.items[index].fields.delay : 3;
-      console.log(contentfulData);
+      //console.log(contentfulData);
       resetTimeout();
       if (contentfulData && contentfulData.board.items[index].fields.content.fields.asset) {
          if (contentfulData.board.items[index].fields.content.fields.vidOverride && contentfulData.board.items[index].fields.content.fields.asset.fields.file.contentType.includes("video")) {
@@ -80,5 +97,11 @@ export default function BoardContent() {
       }
    }
 
-   return <div className={styles.boardContent}>{contentfulData && getModule()}</div>;
+   return (
+      <div className={styles.boardContent}>
+         <div className={styles.fixedScreen} ref={screenRef}>
+            {contentfulData && getModule()}
+         </div>
+      </div>
+   );
 }
