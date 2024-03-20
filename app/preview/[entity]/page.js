@@ -6,7 +6,7 @@ import pageStyles from "@/app/page.module.css";
 import boardStyles from "@/components/BoardContent.module.css";
 import Feature from "@/components/Feature";
 
-export default function Entity() {
+export default function Entity(props) {
    const [contentfulData, setContentfulData] = useState(null);
 
    useEffect(() => {
@@ -62,7 +62,7 @@ export default function Entity() {
    }
 
    return (
-      <ContentfulLivePreviewProvider locale="en-US" enableInspectorMode={pageProps.draftMode} enableLiveUpdates={pageProps.draftMode}>
+      <ContentfulLivePreviewProvider locale="en-US" enableInspectorMode={props.draftMode} enableLiveUpdates={props.draftMode}>
          <main className={pageStyles.main}>
             <div className={boardStyles.boardContent}>{contentfulData && getModule()}</div>;
          </main>
