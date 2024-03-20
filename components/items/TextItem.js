@@ -41,6 +41,7 @@ export default function TextItem(props) {
       color: data.colour,
       fontFamily: data.font,
       fontSize: data.fontSize,
+      textAlign: data.align,
    };
 
    return (
