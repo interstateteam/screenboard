@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ContentfulLivePreviewProvider } from "@contentful/live-preview/react";
 import pageStyles from "@/app/page.module.css";
 import boardStyles from "@/components/BoardContent.module.css";
 import Feature from "@/components/Feature";
@@ -61,8 +62,10 @@ export default function Entity() {
    }
 
    return (
-      <main className={pageStyles.main}>
-         <div className={boardStyles.boardContent}>{contentfulData && getModule()}</div>;
-      </main>
+      <ContentfulLivePreviewProvider locale="en-US" enableInspectorMode={pageProps.draftMode} enableLiveUpdates={pageProps.draftMode}>
+         <main className={pageStyles.main}>
+            <div className={boardStyles.boardContent}>{contentfulData && getModule()}</div>;
+         </main>
+      </ContentfulLivePreviewProvider>
    );
 }
