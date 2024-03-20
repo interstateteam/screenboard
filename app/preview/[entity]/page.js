@@ -1,15 +1,34 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import pageStyles from "@/app/page.module.css";
 import boardStyles from "@/components/BoardContent.module.css";
 import Feature from "@/components/Feature";
 
 export default function Entity() {
    const [contentfulData, setContentfulData] = useState(null);
+   const screenRef = useRef(null);
 
    useEffect(() => {
       retrieveContentfulData();
+
+      const w = 1080;
+      const h = 1920;
+
+      const handleResize = (e) => {
+         let scale = Math.min(e.target.innerWidth / w, e.target.innerHeight / h);
+
+         console.log(screenRef.current);
+
+         screenRef.current.style.transform = "translate(-50%, -50%) " + "scale(" + scale + ")";
+      };
+      window.addEventListener("resize", handleResize);
+
+      handleResize({ target: window });
+
+      return () => {
+         window.removeEventListener("resize", handleResize);
+      };
    }, []);
 
    const retrieveContentfulData = (_event) => {
@@ -62,7 +81,11 @@ export default function Entity() {
 
    return (
       <main className={pageStyles.main}>
-         <div className={boardStyles.boardContent}>{contentfulData && getModule()}</div>;
+         <div className={boardStyles.boardContent}>
+            <div className={boardStyles.fixedScreen} ref={screenRef}>
+               {contentfulData && getModule()}
+            </div>
+         </div>
       </main>
    );
 }
