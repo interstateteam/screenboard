@@ -62,7 +62,7 @@ export default function Entity(props) {
    }
 
    return (
-      <ContentfulLivePreviewProvider locale="en-US" enableInspectorMode={props.draftMode} enableLiveUpdates={props.draftMode}>
+      <ContentfulLivePreviewProvider locale="en-US">
          <main className={pageStyles.main}>
             <div className={boardStyles.boardContent}>{contentfulData && getModule()}</div>;
          </main>
