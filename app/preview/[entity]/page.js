@@ -18,8 +18,6 @@ export default function Entity() {
       const handleResize = (e) => {
          let scale = Math.min(e.target.innerWidth / w, e.target.innerHeight / h);
 
-         console.log(screenRef.current);
-
          screenRef.current.style.transform = "translate(-50%, -50%) " + "scale(" + scale + ")";
       };
       window.addEventListener("resize", handleResize);
