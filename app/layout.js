@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
    title: "Interstate Screenboard",
-   description: "Interstate Office Screenboard",
+   description: "",
 };
 
 export default function RootLayout({ children }) {
