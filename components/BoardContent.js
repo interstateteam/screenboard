@@ -2,6 +2,7 @@
 
 import { useChannel } from "ably/react";
 import { useEffect, useState, useRef } from "react";
+import { CSSTransition } from "react-transition-group";
 import styles from "./BoardContent.module.css";
 import Feature from "./Feature";
 
@@ -9,9 +10,11 @@ export default function BoardContent() {
    const [channelData, setChannelData] = useState({ msg: "initial fetch" });
    const [contentfulData, setContentfulData] = useState(null);
    const [index, setIndex] = useState(0);
+   const [showing, setShowing] = useState(false);
 
    const timeoutRef = useRef(null);
    const screenRef = useRef(null);
+   const featureRef = useRef(null);
 
    useEffect(() => {
       retrieveContentfulData();
@@ -34,9 +37,14 @@ export default function BoardContent() {
    }, []);
 
    useEffect(() => {
+      console.log("showing", showing);
+   }, [showing]);
+
+   useEffect(() => {
       const delay = contentfulData ? contentfulData.board.items[index].fields.delay : 3;
       //console.log(contentfulData);
       resetTimeout();
+      setShowing(true);
       if (contentfulData && contentfulData.board.items[index].fields.content.fields.asset) {
          if (contentfulData.board.items[index].fields.content.fields.vidOverride && contentfulData.board.items[index].fields.content.fields.asset.fields.file.contentType.includes("video")) {
             //Video asset - do nothing
@@ -55,6 +63,7 @@ export default function BoardContent() {
    function getNext() {
       const len = contentfulData ? contentfulData.board.items.length - 1 : -1;
       setIndex((prevIndex) => (prevIndex === len ? 0 : prevIndex + 1));
+      setShowing(false);
    }
 
    function resetTimeout() {
@@ -100,7 +109,11 @@ export default function BoardContent() {
    return (
       <div className={styles.boardContent}>
          <div className={styles.fixedScreen} ref={screenRef}>
-            {contentfulData && getModule()}
+            <CSSTransition in={showing} nodeRef={featureRef} timeout={1000} classNames="fade" unmountOnExit>
+               <div id={styles.feature} ref={featureRef}>
+                  {contentfulData && getModule()}
+               </div>
+            </CSSTransition>
          </div>
       </div>
    );
