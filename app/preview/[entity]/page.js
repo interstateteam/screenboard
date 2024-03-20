@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ContentfulLivePreviewProvider } from "@contentful/live-preview/react";
 import pageStyles from "@/app/page.module.css";
 import boardStyles from "@/components/BoardContent.module.css";
 import Feature from "@/components/Feature";
 
-export default function Entity(props) {
+export default function Entity() {
    const [contentfulData, setContentfulData] = useState(null);
 
    useEffect(() => {
@@ -62,10 +61,8 @@ export default function Entity(props) {
    }
 
    return (
-      <ContentfulLivePreviewProvider locale="en-US">
-         <main className={pageStyles.main}>
-            <div className={boardStyles.boardContent}>{contentfulData && getModule()}</div>;
-         </main>
-      </ContentfulLivePreviewProvider>
+      <main className={pageStyles.main}>
+         <div className={boardStyles.boardContent}>{contentfulData && getModule()}</div>;
+      </main>
    );
 }
