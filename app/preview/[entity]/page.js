@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-//import styles from "./BoardContent.module.css";
-//import Feature from "./Feature";
+import pageStyles from "@/app/page.module.css";
+import boardStyles from "@/components/BoardContent.module.css";
+import Feature from "@/components/Feature";
 
 export default function Entity() {
    const [contentfulData, setContentfulData] = useState(null);
@@ -31,7 +32,24 @@ export default function Entity() {
    };
 
    function getModule() {
-      return <div>Entity Page!</div>;
+      const url = window.location.href.split("/");
+      const id = url[url.length - 1];
+      const items = contentfulData.board.items;
+
+      let data = null;
+
+      for (let i = 0; i < items.length; i++) {
+         if (items[i].sys.id === id) {
+            data = items[i];
+            break;
+         }
+      }
+
+      if (data !== null) {
+         return <Feature data={data} onDispatch={() => {}} />;
+      } else {
+         return <div>Feature Not Found</div>;
+      }
       /*
       const item = contentfulData.board.items[index];
       if (item) {
@@ -42,5 +60,9 @@ export default function Entity() {
       */
    }
 
-   return <div>{contentfulData && getModule()}</div>;
+   return (
+      <main className={pageStyles.main}>
+         <div className={boardStyles.boardContent}>{contentfulData && getModule()}</div>;
+      </main>
+   );
 }

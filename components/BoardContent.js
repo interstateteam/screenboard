@@ -18,7 +18,7 @@ export default function BoardContent() {
 
    useEffect(() => {
       const delay = contentfulData ? contentfulData.board.items[index].fields.delay : 3;
-      console.log(contentfulData);
+      //console.log(contentfulData);
       resetTimeout();
       if (contentfulData && contentfulData.board.items[index].fields.content.fields.asset) {
          if (contentfulData.board.items[index].fields.content.fields.vidOverride && contentfulData.board.items[index].fields.content.fields.asset.fields.file.contentType.includes("video")) {
