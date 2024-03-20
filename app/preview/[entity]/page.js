@@ -1,6 +1,8 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import styles from "./BoardContent.module.css";
-import Feature from "./Feature";
+//import styles from "./BoardContent.module.css";
+//import Feature from "./Feature";
 
 export default function Entity() {
    const [contentfulData, setContentfulData] = useState(null);
@@ -29,7 +31,7 @@ export default function Entity() {
    };
 
    function getModule() {
-      return <div>Enity Page!</div>;
+      return <div>Entity Page!</div>;
       /*
       const item = contentfulData.board.items[index];
       if (item) {
@@ -40,5 +42,5 @@ export default function Entity() {
       */
    }
 
-   return <div className={styles.boardContent}>{contentfulData && getModule()}</div>;
+   return <div>{contentfulData && getModule()}</div>;
 }
