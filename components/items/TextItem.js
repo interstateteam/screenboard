@@ -1,39 +1,34 @@
+import localFont from "next/font/local";
 import styles from "./TextItem.module.css";
+
+const GothamB = localFont({ src: "../fonts/Gotham-Book.otf" });
+const GothamM = localFont({ src: "../fonts/Gotham-Medium.otf" });
+const ReplicaLLWebB = localFont({ src: "../fonts/ReplicaLLWeb-Bold.woff2" });
+const ReplicaLLWebL = localFont({ src: "../fonts/ReplicaLLWeb-Light.woff2" });
+
+//const gothamBookFont = localFont({ src: "@/fonts/gothambook-webfont.woff2" });
 
 export default function TextItem(props) {
    //console.log("text", props.data.fields);
 
    const data = props.data.fields;
 
-   let posClass = "";
-
-   switch (data.position) {
-      case "Center":
-         posClass += "cpos";
+   let font;
+   switch (data.font) {
+      case "Gotham-Book":
+         font = GothamB;
          break;
-      case "Center Left":
-         posClass += "clpos";
+      case "Gotham-Medium":
+         font = GothamM;
          break;
-      case "Center Right":
-         posClass += "crpos";
+      case "ReplicaLLWeb-Bold":
+         font = ReplicaLLWebB;
          break;
-      case "Top Center":
-         posClass += "tcpos";
+      case "ReplicaLLWeb-Light":
+         font = ReplicaLLWebL;
          break;
-      case "Top Left":
-         posClass += "tlpos";
-         break;
-      case "Top Right":
-         posClass += "trpos";
-         break;
-      case "Bottom Center":
-         posClass += "bcpos";
-         break;
-      case "Bottom Left":
-         posClass += "blpos";
-         break;
-      case "Bottom Right":
-         posClass += "brpos";
+      default:
+         font = ReplicaLLWebB;
          break;
    }
 
@@ -42,11 +37,14 @@ export default function TextItem(props) {
       fontFamily: data.font,
       fontSize: data.fontSize,
       textAlign: data.align,
+      left: data.posLeft + "%",
+      top: data.posTop + "%",
+      width: data.width + "%",
    };
 
    return (
-      <div className={`${styles.textItem} ${styles[posClass]}`} style={fontStyle}>
-         <div className={styles.pos}>{props.data.fields.content}</div>
+      <div className={styles.textItem} style={fontStyle}>
+         <p className={font.className}>{props.data.fields.content}</p>
       </div>
    );
 }

@@ -9,7 +9,7 @@ import Feature from "./Feature";
 export default function BoardContent() {
    const [channelData, setChannelData] = useState({ msg: "initial fetch" });
    const [contentfulData, setContentfulData] = useState(null);
-   const [index, setIndex] = useState(0);
+   const [index, setIndex] = useState(-1);
    const [showing, setShowing] = useState(false);
 
    const timeoutRef = useRef(null);
@@ -33,22 +33,25 @@ export default function BoardContent() {
 
       return () => {
          window.removeEventListener("resize", handleResize);
+         resetTimeout();
       };
    }, []);
-
-   useEffect(() => {
-      console.log("showing", showing);
-   }, [showing]);
 
    useEffect(() => {
       const delay = contentfulData ? contentfulData.board.items[index].fields.delay : 3;
       //console.log(contentfulData);
       resetTimeout();
       setShowing(true);
-      if (contentfulData && contentfulData.board.items[index].fields.content.fields.asset) {
-         if (contentfulData.board.items[index].fields.content.fields.vidOverride && contentfulData.board.items[index].fields.content.fields.asset.fields.file.contentType.includes("video")) {
-            //Video asset - do nothing
-         } else {
+      if (contentfulData) {
+         const layers = contentfulData.board.items[index].fields.layers;
+         let override = false;
+         for (let i = 0; i < layers.length; i++) {
+            if (layers[i].fields.vidOverride && layers[i].fields.asset.fields.file.contentType.includes("video")) {
+               override = true;
+               break;
+            }
+         }
+         if (!override) {
             timeoutRef.current = setTimeout(() => getNext(), delay * 1000);
          }
       } else {
@@ -78,7 +81,6 @@ export default function BoardContent() {
    });
 
    const retrieveContentfulData = (_event) => {
-      setIndex(0);
       fetch("/api/contentful", {
          method: "GET",
          headers: {
@@ -94,6 +96,7 @@ export default function BoardContent() {
          })
          .then((jsonStr) => {
             setContentfulData(JSON.parse(jsonStr).result);
+            setIndex(0);
          });
    };
 

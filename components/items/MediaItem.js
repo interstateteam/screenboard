@@ -3,15 +3,19 @@ import styles from "./MediaItem.module.css";
 import { useEffect, useRef } from "react";
 
 export default function MediaItem(props) {
-   //console.log("media", props.data);
-
    const vidRef = useRef(null);
 
    useEffect(() => {
       if (vidRef.current) {
          vidRef.current.addEventListener("ended", onVidComplete);
       }
-   }, [vidRef]);
+
+      return () => {
+         if (vidRef.current) {
+            vidRef.current.removeEventListener("ended", onVidComplete);
+         }
+      };
+   }, [props.data.fields.asset.fields.file]);
 
    function onVidComplete() {
       vidRef.current.removeEventListener("ended", onVidComplete);
@@ -19,26 +23,31 @@ export default function MediaItem(props) {
    }
 
    function getMediaItem() {
-      const data = props.data.fields.asset.fields.file;
-      if (data.contentType.includes("image")) {
+      const data = props.data.fields;
+      const file = props.data.fields.asset.fields.file;
+      if (file.contentType.includes("image")) {
+         const imgW = data.width ? data.width + "%" : "auto";
+         const imgH = data.height ? data.height + "%" : "100%";
          return (
             <Image
-               className={styles.imageItem}
-               src={"https:" + data.url}
+               className={styles.mediaItem}
+               src={"https:" + file.url}
                alt="image"
                sizes="100%"
                style={{
-                  width: "auto",
-                  height: "100%",
+                  width: imgW,
+                  height: imgH,
                }}
-               width={data.details.image.width}
-               height={data.details.image.height}
+               width={file.details.image.width}
+               height={file.details.image.height}
             />
          );
-      } else if (data.contentType.includes("video")) {
+      } else if (file.contentType.includes("video")) {
+         const vidW = data.width ? data.width + "%" : "";
+         const vidH = data.height ? data.height + "%" : "";
          return (
-            <video ref={vidRef} className={styles.videoItem} width="320" height="240" muted autoPlay preload="true">
-               <source src={"https:" + data.url} type="video/mp4" />
+            <video ref={vidRef} key={file.url} className={styles.mediaItem} width={vidW} height={vidH} muted autoPlay preload="true">
+               <source src={"https:" + file.url} type="video/mp4" />
             </video>
          );
       }
