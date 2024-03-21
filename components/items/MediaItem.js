@@ -6,7 +6,6 @@ export default function MediaItem(props) {
    const vidRef = useRef(null);
 
    useEffect(() => {
-      console.log("UPDATE", vidRef);
       if (vidRef.current) {
          vidRef.current.addEventListener("ended", onVidComplete);
       }

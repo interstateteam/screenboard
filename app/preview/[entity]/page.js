@@ -67,14 +67,6 @@ export default function Entity() {
       } else {
          return <div>Feature Not Found</div>;
       }
-      /*
-      const item = contentfulData.board.items[index];
-      if (item) {
-         return <Feature data={item} onDispatch={getNext} />;
-      } else {
-         return null;
-      }
-      */
    }
 
    return (
