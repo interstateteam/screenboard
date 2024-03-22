@@ -16,7 +16,7 @@ export default function Overlay() {
    const months = ["January", "February", "March", "April", "May", "June", "July", "Auguts", "September", "October", "Novemebr", "December"];
 
    useEffect(() => {
-      const url = "https://api.open-meteo.com/v1/forecast?latitude=51.3&longitude=0.13&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=GMT&forecast_days=1";
+      const url = "https://api.open-meteo.com/v1/forecast?latitude=51.3&longitude=0.13&current=temperature_2m,weather_code&timezone=GMT&forecast_days=1";
       const fetchData = async () => {
          try {
             const response = await fetch(url);
@@ -38,8 +38,6 @@ export default function Overlay() {
                icon: details.icon,
                static: details.static,
                temperature: result.current.temperature_2m,
-               wind: result.current.wind_speed_10m,
-               humidity: result.current.relative_humidity_2m,
             };
             setWeather(data);
          } catch (error) {
