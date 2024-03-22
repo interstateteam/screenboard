@@ -1,41 +1,23 @@
-import Image from "next/image";
-import TextItem from "./items/TextItem";
+import { useEffect, useState, useRef } from "react";
+import { CSSTransition } from "react-transition-group";
+import localFont from "next/font/local";
 import styles from "./Overlay.module.css";
+import WeatherPanel from "./WeatherPanel";
+
+const ReplicaLLWebB = localFont({ src: "./fonts/ReplicaLLWeb-Bold.woff2" });
 
 export default function Overlay(props) {
    //console.log("overlay", props);
 
-   const data = props.data.fields;
-
-   const overlayStyle = {
-      backgroundColor: data.backgroundColour,
-      opacity: data.backgroundOpacity,
-   };
+   const panelRef = useRef(null);
 
    return (
       <div className={styles.overlay}>
-         <div className={styles.overlayItem} style={overlayStyle}></div>
-         {data.image && (
-            <div className={styles.overlayItem}>
-               <Image
-                  className={styles.overlayImage}
-                  src={"https:" + data.image.fields.file.url}
-                  alt="image"
-                  sizes="100%"
-                  style={{
-                     width: "auto",
-                     height: "100%",
-                  }}
-                  width={data.image.fields.file.details.image.width}
-                  height={data.image.fields.file.details.image.height}
-               />
+         <CSSTransition in={props.show} nodeRef={panelRef} timeout={1000} classNames="slide">
+            <div className={ReplicaLLWebB.className} ref={panelRef}>
+               <WeatherPanel />
             </div>
-         )}
-         {data.textOverlay && (
-            <div className={styles.overlayItem}>
-               <TextItem data={data.textOverlay} />
-            </div>
-         )}
+         </CSSTransition>
       </div>
    );
 }

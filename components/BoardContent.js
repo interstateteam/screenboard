@@ -4,6 +4,7 @@ import { useChannel } from "ably/react";
 import { useEffect, useState, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import styles from "./BoardContent.module.css";
+import Overlay from "./Overlay";
 import Feature from "./Feature";
 
 export default function BoardContent() {
@@ -11,6 +12,7 @@ export default function BoardContent() {
    const [contentfulData, setContentfulData] = useState(null);
    const [index, setIndex] = useState(-1);
    const [showing, setShowing] = useState(false);
+   const [showOverlay, setShowOverlay] = useState(true);
 
    const timeoutRef = useRef(null);
    const screenRef = useRef(null);
@@ -39,7 +41,8 @@ export default function BoardContent() {
 
    useEffect(() => {
       const delay = contentfulData ? contentfulData.board.items[index].fields.delay : 3;
-      //console.log(contentfulData);
+      //console.log("data", contentfulData);
+      setShowOverlay(contentfulData ? !contentfulData.board.items[index].fields.hideOverlay : true);
       resetTimeout();
       setShowing(true);
       if (contentfulData) {
@@ -117,6 +120,7 @@ export default function BoardContent() {
                   {contentfulData && getModule()}
                </div>
             </CSSTransition>
+            <Overlay show={showOverlay} />
          </div>
       </div>
    );

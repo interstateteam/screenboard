@@ -180,3 +180,40 @@ table {
    transform: scale(0.8);
    transition: opacity 1000ms, transform 1000ms;
 }
+
+.slide-enter {
+   position: absolute;
+   top: 0;
+   right: -100% !important;
+   transition: right 1000ms;
+}
+.slide-enter-active {
+   position: absolute;
+   top: 0;
+   right: 0 !important;
+   transition: right 1000ms;
+}
+.slide-enter-done {
+   position: absolute;
+   top: 0;
+   right: 0 !important;
+   transition: right 1000ms;
+}
+.slide-exit {
+   position: absolute;
+   top: 0;
+   right: 0 !important;
+   transition: right 1000ms;
+}
+.slide-exit-active {
+   position: absolute;
+   top: 0;
+   right: -100% !important;
+   transition: right 1000ms;
+}
+.slide-exit-done {
+   position: absolute;
+   top: 0;
+   right: -100% !important;
+   transition: right 1000ms;
+}
