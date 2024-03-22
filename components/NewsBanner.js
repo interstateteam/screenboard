@@ -17,8 +17,6 @@ export default function NewsBanner() {
             }
             const result = await response.json();
 
-            console.log(result.articles);
-
             setNews(result.articles);
          } catch (error) {
             throw new Error(error);
