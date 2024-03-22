@@ -39,6 +39,10 @@
    opacity: 0.8;
 }
 
+.title span {
+   color: #0be263;
+}
+
 .main h2 {
    font-size: 50px;
    margin-bottom: 4px;

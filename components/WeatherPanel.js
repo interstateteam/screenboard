@@ -66,7 +66,7 @@ export default function Overlay() {
                   <div className={styles.details}>
                      <div className={styles.title}>
                         <h2>
-                           INTER<span style={{ color: "#0BE263" }}>/</span>STATE
+                           INTER<span>/</span>STATE
                         </h2>
                         <p>{weather.date}</p>
                      </div>
