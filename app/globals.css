@@ -185,35 +185,41 @@ table {
    position: absolute;
    top: 0;
    right: -100% !important;
-   transition: right 1000ms;
+   opacity: 0;
+   transition: right 1000ms, opacity 1000ms;
 }
 .slide-enter-active {
    position: absolute;
    top: 0;
    right: 0 !important;
-   transition: right 1000ms;
+   opacity: 1;
+   transition: right 1000ms, opacity 1000ms;
 }
 .slide-enter-done {
    position: absolute;
    top: 0;
    right: 0 !important;
-   transition: right 1000ms;
+   opacity: 1;
+   transition: right 1000ms, opacity 1000ms;
 }
 .slide-exit {
    position: absolute;
    top: 0;
    right: 0 !important;
-   transition: right 1000ms;
+   opacity: 1;
+   transition: right 1000ms, opacity 1000ms;
 }
 .slide-exit-active {
    position: absolute;
    top: 0;
    right: -100% !important;
-   transition: right 1000ms;
+   opacity: 0;
+   transition: right 1000ms, opacity 1000ms;
 }
 .slide-exit-done {
    position: absolute;
    top: 0;
    right: -100% !important;
-   transition: right 1000ms;
+   opacity: 0;
+   transition: right 1000ms, opacity 1000ms;
 }
