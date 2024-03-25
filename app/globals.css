@@ -181,39 +181,100 @@ table {
    transition: opacity 1000ms, transform 1000ms;
 }
 
-.slide-enter {
+.weatherHide-enter {
    position: absolute;
    top: 0;
    right: -100% !important;
-   transition: right 1000ms;
+   opacity: 0;
+   transition: right 1000ms, opacity 1000ms;
 }
-.slide-enter-active {
+.weatherHide-enter-active {
    position: absolute;
    top: 0;
    right: 0 !important;
-   transition: right 1000ms;
+   opacity: 1;
+   transition: right 1000ms, opacity 1000ms;
 }
-.slide-enter-done {
+.weatherHide-enter-done {
    position: absolute;
    top: 0;
    right: 0 !important;
-   transition: right 1000ms;
+   opacity: 1;
+   transition: right 1000ms, opacity 1000ms;
 }
-.slide-exit {
+.weatherHide-exit {
    position: absolute;
    top: 0;
    right: 0 !important;
-   transition: right 1000ms;
+   opacity: 1;
+   transition: right 1000ms, opacity 1000ms;
 }
-.slide-exit-active {
+.weatherHide-exit-active {
    position: absolute;
    top: 0;
    right: -100% !important;
-   transition: right 1000ms;
+   opacity: 0;
+   transition: right 1000ms, opacity 1000ms;
 }
-.slide-exit-done {
+.weatherHide-exit-done {
    position: absolute;
    top: 0;
    right: -100% !important;
-   transition: right 1000ms;
+   opacity: 0;
+   transition: right 1000ms, opacity 1000ms;
+}
+
+.newsHide-enter {
+   position: absolute;
+   bottom: -50%;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   opacity: 0;
+   transition: bottom 1000ms, opacity 1000ms;
+}
+.newsHide-enter-active {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   height: 100px;
+   width: 100%;
+   opacity: 1;
+   transition: bottom 1000ms, opacity 1000ms;
+}
+.newsHide-enter-done {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   height: 100px;
+   width: 100%;
+   opacity: 1;
+   transition: bottom 1000ms, opacity 1000ms;
+}
+.newsHide-exit {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   height: 100px;
+   width: 100%;
+   opacity: 1;
+   transition: bottom 1000ms, opacity 1000ms;
+}
+.newsHide-exit-active {
+   position: absolute;
+   bottom: -50%;
+   left: 0;
+   height: 100px;
+   width: 100%;
+   opacity: 0;
+   transition: bottom 1000ms, opacity 1000ms;
+}
+.newsHide-exit-done {
+   position: absolute;
+   bottom: -50%;
+   left: 0;
+   height: 100px;
+   width: 100%;
+   opacity: 0;
+   transition: bottom 1000ms, opacity 1000ms;
 }

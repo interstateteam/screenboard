@@ -9,7 +9,7 @@
    border-radius: 10px;
    background: rgb(2, 0, 36);
    background: linear-gradient(30deg, rgba(2, 0, 36, 1) 20%, rgba(11, 226, 99, 1) 100%);
-   box-shadow: 5px -5px 15px #000000;
+   box-shadow: 0px 0px 15px #000000;
 }
 
 .panel hr {
@@ -37,6 +37,10 @@
    font-size: 12px;
    margin-bottom: 4px;
    opacity: 0.8;
+}
+
+.title span {
+   color: #0be263;
 }
 
 .main h2 {
