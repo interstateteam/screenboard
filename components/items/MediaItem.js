@@ -40,6 +40,7 @@ export default function MediaItem(props) {
                }}
                width={file.details.image.width}
                height={file.details.image.height}
+               priority
             />
          );
       } else if (file.contentType.includes("video")) {

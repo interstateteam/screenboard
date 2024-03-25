@@ -26,7 +26,7 @@ export default function NewsBanner() {
       fetchData();
 
       timeoutRef.current = setTimeout(() => {
-         setTime(new Date.now());
+         setTime(new Date().getTime());
       }, 3600000);
 
       return () => {
@@ -57,16 +57,3 @@ export default function NewsBanner() {
       </>
    );
 }
-
-/*
-<div className={styles.iconContainer}>
-                  <div className={styles.icon}>
-                     <svg width="100" height="100">
-                        <path d={weather.icon} />
-                     </svg>
-                  </div>
-               </div>
-
-
-               <div className={styles.icon}>{weather.icon}</div>
-               */

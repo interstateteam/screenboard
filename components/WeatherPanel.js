@@ -48,7 +48,7 @@ export default function Overlay() {
       fetchData();
 
       timeoutRef.current = setTimeout(() => {
-         setTime(new Date.now());
+         setTime(new Date().getTime());
       }, 3600000);
 
       return () => {
