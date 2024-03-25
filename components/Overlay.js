@@ -2,10 +2,10 @@ import { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import localFont from "next/font/local";
 import styles from "./Overlay.module.css";
-import WeatherPanel from "./WeatherPanel";
-import NewsBanner from "./NewsBanner";
+import WeatherPanel from "./overlays/WeatherPanel";
+import NewsBanner from "./overlays/NewsBanner";
 
-const ReplicaLLWebB = localFont({ src: "./fonts/ReplicaLLWeb-Bold.woff2" });
+const ReplicaLLWebB = localFont({ src: "../public/fonts/ReplicaLLWeb-Bold.woff2" });
 
 export default function Overlay(props) {
    //console.log("overlay", props);

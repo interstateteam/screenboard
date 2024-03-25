@@ -1,10 +1,10 @@
 import localFont from "next/font/local";
 import styles from "./TextItem.module.css";
 
-const GothamB = localFont({ src: "../fonts/Gotham-Book.otf" });
-const GothamM = localFont({ src: "../fonts/Gotham-Medium.otf" });
-const ReplicaLLWebB = localFont({ src: "../fonts/ReplicaLLWeb-Bold.woff2" });
-const ReplicaLLWebL = localFont({ src: "../fonts/ReplicaLLWeb-Light.woff2" });
+const GothamB = localFont({ src: "../../public/fonts/Gotham-Book.otf" });
+const GothamM = localFont({ src: "../../public/fonts/Gotham-Medium.otf" });
+const ReplicaLLWebB = localFont({ src: "../../public/fonts/ReplicaLLWeb-Bold.woff2" });
+const ReplicaLLWebL = localFont({ src: "../../public/fonts/ReplicaLLWeb-Light.woff2" });
 
 //const gothamBookFont = localFont({ src: "@/fonts/gothambook-webfont.woff2" });
 

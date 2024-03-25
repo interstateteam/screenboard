@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import localFont from "next/font/local";
 import styles from "./WeatherPanel.module.css";
-import { getWeatherCode } from "./utils/WeatherDetails";
+import { getWeatherCode } from "../../services/WeatherDetails";
 import Clock from "react-live-clock";
 
-const ReplicaLLWebB = localFont({ src: "./fonts/ReplicaLLWeb-Bold.woff2" });
+const ReplicaLLWebB = localFont({ src: "../../public/fonts/ReplicaLLWeb-Bold.woff2" });
 
 export default function Overlay() {
    const [weather, setWeather] = useState(null);
