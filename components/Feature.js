@@ -10,7 +10,7 @@ export default function Feature(props) {
          case "media":
             return <MediaItem key={i} data={item} onDispatch={props.onDispatch} />;
          case "iFrame":
-            return <FrameItem key={i} data={item} />;
+            return <FrameItem key={i} data={item} onDispatch={props.onDispatch} />;
          case "text":
             return <TextItem key={i} data={item} />;
          case "colorPane":

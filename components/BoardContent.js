@@ -49,7 +49,7 @@ export default function BoardContent() {
          const layers = contentfulData.board.items[index].fields.layers;
          let override = false;
          for (let i = 0; i < layers.length; i++) {
-            if (layers[i].fields.vidOverride && layers[i].fields.asset.fields.file.contentType.includes("video")) {
+            if ((layers[i].fields.vidOverride && layers[i].fields.asset.fields.file.contentType.includes("video")) || layers[i].fields.frameOverride) {
                override = true;
                break;
             }
