@@ -1,3 +1,4 @@
+/*
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 
@@ -13,6 +14,7 @@ export async function GET(req) {
       return NextResponse.json({ error: "failed to load data" });
    }
 }
+*/
 /*
 const sdk = require("api")("@webz-test/v1.0#4szmfkuv96r9s");
 

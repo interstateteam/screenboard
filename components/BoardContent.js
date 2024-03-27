@@ -148,6 +148,7 @@ export default function BoardContent() {
    };
 
    const retrieveNewsData = (_event) => {
+      /*
       const data = { q: "hello there" };
       fetch("/api/news?" + new URLSearchParams(data), {
          method: "GET",
@@ -167,6 +168,7 @@ export default function BoardContent() {
             //console.log(JSON.parse(jsonStr).result);
             //setNewsData(JSON.parse(jsonStr).result);
          });
+         */
    };
 
    const getFeatureModule = () => {
