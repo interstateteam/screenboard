@@ -8,7 +8,7 @@ const ReplicaLLWebB = localFont({ src: "../../public/fonts/ReplicaLLWeb-Bold.wof
 
 export default function Overlay() {
    const [weather, setWeather] = useState(null);
-   const [time, setTime] = useState(0);
+   const [count, setCount] = useState(0);
 
    const timeoutRef = useRef(null);
 
@@ -48,7 +48,7 @@ export default function Overlay() {
       fetchData();
 
       timeoutRef.current = setTimeout(() => {
-         setTime(new Date().getTime());
+         setTime((count) => (count > 0 ? 0 : count + 1));
       }, 3600000);
 
       return () => {
@@ -56,7 +56,7 @@ export default function Overlay() {
             clearTimeout(timeoutRef.current);
          }
       };
-   }, [time]);
+   }, [count]);
 
    return (
       <div className={styles.panel}>
