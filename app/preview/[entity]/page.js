@@ -9,7 +9,10 @@ export default function Entity() {
    const [contentfulData, setContentfulData] = useState(null);
    const screenRef = useRef(null);
 
+   const [isClient, setIsClient] = useState(false);
+
    useEffect(() => {
+      setIsClient(true);
       retrieveContentfulData();
 
       const w = 1080;
@@ -73,7 +76,7 @@ export default function Entity() {
       <main className={pageStyles.main}>
          <div className={boardStyles.boardContent}>
             <div className={boardStyles.fixedScreen} ref={screenRef}>
-               {contentfulData && getModule()}
+               {isClient && contentfulData && getModule()}
             </div>
          </div>
       </main>

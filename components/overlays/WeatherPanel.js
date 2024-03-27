@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import localFont from "next/font/local";
 import styles from "./WeatherPanel.module.css";
 import { getWeatherCode } from "../../services/WeatherDetails";
-//import Clock from "react-live-clock";
+import Clock from "react-live-clock";
 
 const ReplicaLLWebB = localFont({ src: "../../public/fonts/ReplicaLLWeb-Bold.woff2" });
 
@@ -88,10 +88,7 @@ export default function Overlay() {
                </div>
             </div>
          )}
+         <Clock className={styles.clock} format={"HH:mm"} ticking={true} timezone={"GB"} suppressHydrationWarning />
       </div>
    );
 }
-
-/*
-<Clock className={styles.clock} format={"HH:mm"} ticking={true} timezone={"GB"} suppressHydrationWarning />
-               */
