@@ -9,8 +9,14 @@ import Clock from "react-live-clock";
 const ReplicaLLWebB = localFont({ src: "../../public/fonts/ReplicaLLWeb-Bold.woff2" });
 
 export default function Overlay() {
-   const [weather, setWeather] = useState(null);
-   const [count, setCount] = useState(0);
+   const [weather, setWeather] = useState({
+      date: "",
+      description: "No Data",
+      icon: "clear",
+      static: "clear",
+      temperature: "0",
+   });
+   const [count, setCount] = useState(-1);
 
    const timeoutRef = useRef(null);
 
