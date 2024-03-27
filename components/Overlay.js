@@ -13,6 +13,8 @@ export default function Overlay(props) {
    const panelRef = useRef(null);
    const bannerRef = useRef(null);
 
+   const showNews = props.show && !props.news;
+
    return (
       <div className={styles.overlay}>
          <CSSTransition in={props.show} nodeRef={panelRef} timeout={1000} classNames="weatherHide">
@@ -21,7 +23,7 @@ export default function Overlay(props) {
             </div>
          </CSSTransition>
          {process.env.NODE_ENV === "development" && (
-            <CSSTransition in={props.show} nodeRef={bannerRef} timeout={1000} classNames="newsHide">
+            <CSSTransition in={showNews} nodeRef={bannerRef} timeout={1000} classNames="newsHide">
                <div className={ReplicaLLWebB.className} ref={bannerRef}>
                   <NewsBanner />
                </div>

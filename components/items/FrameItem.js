@@ -18,10 +18,10 @@ export default function FrameItem(props) {
       };
    }, [props.data.fields.url]);
 
-   function onFrameComplete() {
+   const onFrameComplete = () => {
       frameRef.current.removeEventListener("message", onFrameComplete);
       props.onDispatch();
-   }
+   };
 
    const frameStyle = {
       left: data.posLeft + "%",

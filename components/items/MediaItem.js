@@ -17,10 +17,10 @@ export default function MediaItem(props) {
       };
    }, [props.data.fields.asset.fields.file]);
 
-   function onVidComplete() {
+   const onVidComplete = () => {
       vidRef.current.removeEventListener("ended", onVidComplete);
       props.onDispatch();
-   }
+   };
 
    function getMediaItem() {
       const data = props.data.fields;
