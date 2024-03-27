@@ -92,9 +92,9 @@ export default function Overlay() {
                      </div>
                   </div>
                )}
+               <Clock className={styles.clock} format={"HH:mm"} ticking={true} timezone={"GB"} suppressHydrationWarning />
             </>
          )}
-         <Clock className={styles.clock} format={"HH:mm"} ticking={true} timezone={"GB"} suppressHydrationWarning />
       </div>
    );
 }
