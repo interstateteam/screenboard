@@ -1,7 +1,27 @@
+import { useRef } from "react";
 import styles from "./FrameItem.module.css";
 
 export default function FrameItem(props) {
    const data = props.data.fields;
+
+   const frameRef = useRef(null);
+
+   useEffect(() => {
+      if (frameRef.current) {
+         frameRef.current.addEventListener("message", onFrameComplete);
+      }
+
+      return () => {
+         if (frameRef.current) {
+            frameRef.current.removeEventListener("message", onFrameComplete);
+         }
+      };
+   }, [props.data.fields.url]);
+
+   const onFrameComplete = () => {
+      frameRef.current.removeEventListener("message", onFrameComplete);
+      props.onDispatch();
+   };
 
    const frameStyle = {
       left: data.posLeft + "%",
@@ -10,5 +30,5 @@ export default function FrameItem(props) {
       height: data.height + "%",
    };
    //console.log("frame", props.data.fields.url);
-   return <iframe className={styles.frameItem} src={props.data.fields.url} style={frameStyle}></iframe>;
+   return <iframe ref={frameRef} className={styles.frameItem} src={props.data.fields.url} style={frameStyle}></iframe>;
 }

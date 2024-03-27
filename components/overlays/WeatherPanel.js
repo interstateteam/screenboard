@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState, useRef } from "react";
 import localFont from "next/font/local";
 import styles from "./WeatherPanel.module.css";
@@ -8,7 +10,7 @@ const ReplicaLLWebB = localFont({ src: "../../public/fonts/ReplicaLLWeb-Bold.wof
 
 export default function Overlay() {
    const [weather, setWeather] = useState(null);
-   const [time, setTime] = useState(0);
+   const [count, setCount] = useState(0);
 
    const timeoutRef = useRef(null);
 
@@ -48,7 +50,7 @@ export default function Overlay() {
       fetchData();
 
       timeoutRef.current = setTimeout(() => {
-         setTime(new Date().getTime());
+         setCount((count) => (count > 0 ? 0 : count + 1));
       }, 3600000);
 
       return () => {
@@ -56,7 +58,7 @@ export default function Overlay() {
             clearTimeout(timeoutRef.current);
          }
       };
-   }, [time]);
+   }, [count]);
 
    return (
       <div className={styles.panel}>
@@ -88,20 +90,7 @@ export default function Overlay() {
                </div>
             </div>
          )}
-         <Clock className={styles.clock} format={"HH:mm"} ticking={true} timezone={"GB"} />
+         <Clock className={styles.clock} format={"HH:mm"} ticking={true} timezone={"GB"} suppressHydrationWarning />
       </div>
    );
 }
-
-/*
-<div className={styles.iconContainer}>
-                  <div className={styles.icon}>
-                     <svg width="100" height="100">
-                        <path d={weather.icon} />
-                     </svg>
-                  </div>
-               </div>
-
-
-               <div className={styles.icon}>{weather.icon}</div>
-               */

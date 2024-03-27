@@ -122,35 +122,10 @@ table {
    border-collapse: collapse;
    border-spacing: 0;
 }
-/*
-@font-face {
-   font-family: "Gotham-Book";
-   src: url("../../fonts/gothambook-webfont.woff2") format("woff2"), url("../../fonts/gothambook-webfont.woff") format("woff");
-   font-weight: normal;
-   font-style: normal;
-}
 
-@font-face {
-   font-family: "Gotham-Medium";
-   src: url("./fonts/gothammedium-webfont.woff2") format("woff2"), url("fonts/gothammedium-webfont.woff") format("woff");
-   font-weight: normal;
-   font-style: normal;
+body {
+   overflow: hidden;
 }
-
-@font-face {
-   font-family: "ReplicaLLWeb-Bold";
-   src: url("./fonts/ReplicaLLWeb-Bold.woff") format("woff");
-   font-weight: normal;
-   font-style: normal;
-}
-
-@font-face {
-   font-family: "ReplicaLLWeb-Light";
-   src: url("./fonts/ReplicaLLWeb-Light.woff") format("woff");
-   font-weight: normal;
-   font-style: normal;
-}
-*/
 
 .fade-enter {
    opacity: 0;
