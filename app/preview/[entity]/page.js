@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState, useRef } from "react";
 import pageStyles from "@/app/page.module.css";
 import boardStyles from "@/components/BoardContent.module.css";

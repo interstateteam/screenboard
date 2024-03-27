@@ -1,10 +1,8 @@
-"use client";
-
 import { useEffect, useState, useRef } from "react";
 import localFont from "next/font/local";
 import styles from "./WeatherPanel.module.css";
 import { getWeatherCode } from "../../services/WeatherDetails";
-import Clock from "react-live-clock";
+//import Clock from "react-live-clock";
 
 const ReplicaLLWebB = localFont({ src: "../../public/fonts/ReplicaLLWeb-Bold.woff2" });
 
@@ -90,20 +88,10 @@ export default function Overlay() {
                </div>
             </div>
          )}
-         <Clock className={styles.clock} format={"HH:mm"} ticking={true} timezone={"GB"} />
       </div>
    );
 }
 
 /*
-<div className={styles.iconContainer}>
-                  <div className={styles.icon}>
-                     <svg width="100" height="100">
-                        <path d={weather.icon} />
-                     </svg>
-                  </div>
-               </div>
-
-
-               <div className={styles.icon}>{weather.icon}</div>
+<Clock className={styles.clock} format={"HH:mm"} ticking={true} timezone={"GB"} suppressHydrationWarning />
                */
