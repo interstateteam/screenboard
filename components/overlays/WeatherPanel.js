@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState, useRef } from "react";
 import localFont from "next/font/local";
 import styles from "./WeatherPanel.module.css";
@@ -9,13 +7,8 @@ import Clock from "react-live-clock";
 const ReplicaLLWebB = localFont({ src: "../../public/fonts/ReplicaLLWeb-Bold.woff2" });
 
 export default function Overlay() {
-   const [weather, setWeather] = useState({
-      date: "",
-      description: "No Data",
-      icon: "clear",
-      static: "clear",
-      temperature: "0",
-   });
+   const [isClient, setIsClient] = useState(false);
+   const [weather, setWeather] = useState(null);
    const [count, setCount] = useState(-1);
 
    const timeoutRef = useRef(null);
@@ -24,6 +17,7 @@ export default function Overlay() {
    const months = ["January", "February", "March", "April", "May", "June", "July", "Auguts", "September", "October", "Novemebr", "December"];
 
    useEffect(() => {
+      setIsClient(true);
       const url = "https://api.open-meteo.com/v1/forecast?latitude=51.3&longitude=0.13&current=temperature_2m,weather_code&timezone=GMT&forecast_days=1";
       const fetchData = async () => {
          try {
@@ -68,13 +62,13 @@ export default function Overlay() {
 
    return (
       <div className={styles.panel}>
-         {weather && (
+         {isClient && weather && (
             <div className={ReplicaLLWebB.className}>
                <div className={styles.panelContent}>
                   <div className={styles.details}>
                      <div className={styles.title}>
                         <h2>
-                           INTER<span>/</span>STATE
+                           INTER<span>&#47;</span>STATE
                         </h2>
                         <p>{weather.date}</p>
                      </div>
@@ -100,3 +94,35 @@ export default function Overlay() {
       </div>
    );
 }
+
+/*
+{weather && (
+            <div className={ReplicaLLWebB.className}>
+               <div className={styles.panelContent}>
+                  <div className={styles.details}>
+                     <div className={styles.title}>
+                        <h2>
+                           INTER<span>&#47;</span>STATE
+                        </h2>
+                        <p>{weather.date}</p>
+                     </div>
+                     <hr />
+                     <div className={styles.main}>
+                        <h2>
+                           {weather.temperature}
+                           <sup>{"\u00B0" + "C"}</sup>
+                        </h2>
+                     </div>
+                  </div>
+                  <div className={styles.iconContainer}>
+                     <div className={styles.icon}>{weather.icon}</div>
+                  </div>
+               </div>
+               <div className={styles.description}>
+                  <div className={styles.icon}>{weather.static}</div>
+                  <p>{weather.description}</p>
+               </div>
+            </div>
+         )}
+         <Clock className={styles.clock} format={"HH:mm"} ticking={true} timezone={"GB"} suppressHydrationWarning />
+*/
