@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState, useRef } from "react";
 import localFont from "next/font/local";
 import styles from "./WeatherPanel.module.css";
@@ -48,7 +50,7 @@ export default function Overlay() {
       fetchData();
 
       timeoutRef.current = setTimeout(() => {
-         setTime((count) => (count > 0 ? 0 : count + 1));
+         setCount((count) => (count > 0 ? 0 : count + 1));
       }, 3600000);
 
       return () => {
