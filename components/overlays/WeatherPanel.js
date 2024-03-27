@@ -62,35 +62,39 @@ export default function Overlay() {
 
    return (
       <div className={styles.panel}>
-         {isClient && weather && (
-            <div className={ReplicaLLWebB.className}>
-               <div className={styles.panelContent}>
-                  <div className={styles.details}>
-                     <div className={styles.title}>
-                        <h2>
-                           INTER<span>&#47;</span>STATE
-                        </h2>
-                        <p>{weather.date}</p>
+         {isClient && (
+            <>
+               {weather && (
+                  <div className={ReplicaLLWebB.className}>
+                     <div className={styles.panelContent}>
+                        <div className={styles.details}>
+                           <div className={styles.title}>
+                              <h2>
+                                 INTER<span>&#47;</span>STATE
+                              </h2>
+                              <p>{weather.date}</p>
+                           </div>
+                           <hr />
+                           <div className={styles.main}>
+                              <h2>
+                                 {weather.temperature}
+                                 <sup>{"\u00B0" + "C"}</sup>
+                              </h2>
+                           </div>
+                        </div>
+                        <div className={styles.iconContainer}>
+                           <div className={styles.icon}>{weather.icon}</div>
+                        </div>
                      </div>
-                     <hr />
-                     <div className={styles.main}>
-                        <h2>
-                           {weather.temperature}
-                           <sup>{"\u00B0" + "C"}</sup>
-                        </h2>
+                     <div className={styles.description}>
+                        <div className={styles.icon}>{weather.static}</div>
+                        <p>{weather.description}</p>
                      </div>
                   </div>
-                  <div className={styles.iconContainer}>
-                     <div className={styles.icon}>{weather.icon}</div>
-                  </div>
-               </div>
-               <div className={styles.description}>
-                  <div className={styles.icon}>{weather.static}</div>
-                  <p>{weather.description}</p>
-               </div>
-            </div>
+               )}
+            </>
          )}
-         <Clock className={styles.clock} format={"HH:mm"} ticking={true} timezone={"GB"} suppressHydrationWarning />
+         <Clock className={styles.clock} format={"HH:mm"} ticking={true} timezone={"GB"} suppressHydrationWarning />}
       </div>
    );
 }
