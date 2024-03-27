@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState, useRef } from "react";
 import localFont from "next/font/local";
 import styles from "./WeatherPanel.module.css";
